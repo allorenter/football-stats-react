@@ -10,7 +10,7 @@ import { styled } from '@material-ui/core/styles';
 const StyledContainer = styled(Grid)({
     padding: ".1rem 2.5rem",
     background: colors.primary,
-    minHeight: "4.1rem",
+    minHeight: "4.4rem",
 });
 
 const ContainerMenus = (props) => {

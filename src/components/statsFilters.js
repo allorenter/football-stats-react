@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "@material-ui/core/styles";
-import { colors, DivFlex } from "../styles/styles";
+import { colors, DivFlex, lightenDarkenColor } from "../styles/styles";
 import { MenuItem, Select } from "@material-ui/core";
 import axios from "axios";
 import { getUrlRequest } from "../utils/utils";
@@ -9,35 +9,30 @@ const StyledSelect = styled(Select)({
   color: colors.font,
   fontWeight: "600",
   minWidth: "2rem",
+  paddingLeft: "8px",
+  background: lightenDarkenColor(colors.tertiary, 30),
+  borderRadius: "4px",
+  fontSize: ".85rem",
+  minWidth: "190px",
+  paddingTop: "1px",
   "& svg": {
     color: colors.font,
   },
-  "&:hover": {
-    transition: "transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms",
-    color: colors.font,
-    "& svg": {
-      color: colors.font
-    }
-  },
-  "&:hover::before": {
-    borderBottom: `2px solid ${colors.detailsColor} !important`
-  },
-  "&::before": {
-    borderBottom: `2px solid ${colors.font}`
-  },
-  "& div:focus": {
-    background: colors.primary,
-  },
-  "&::after":{
-    borderBottom: "none"
+  "&:hover":{
+    opacity: ".8"
   }
+});
+
+const StyledItem = styled(MenuItem)({
+  fontSize: ".85rem",
+  minWidth: "176px"
 });
 
 const StatsFilters = () => {
   const [selectedStat, setSelectedStat] = useState("FTG");
   const [open, setOpen] = React.useState(false);
   const [stats, setStats] = useState([]);
-
+  
   useEffect(() => {
     axios
     .get(getUrlRequest("stat/get"))
@@ -48,19 +43,31 @@ const StatsFilters = () => {
       
     });
   }, [])
-
+  
   
   return (
     <DivFlex>
       <StyledSelect
+          disableUnderline 
           id="statSelector"
           open={open}
           onClose={()=>setOpen(false)}
           onOpen={()=>setOpen(true)}
           value={selectedStat}
           onChange={e=>setSelectedStat(e.target.value)}
+          MenuProps={{
+            anchorOrigin: {
+              vertical: "bottom",
+              horizontal: "left"
+            },
+            transformOrigin: {
+              vertical: "top",
+              horizontal: "left"
+            },
+            getContentAnchorEl: null
+          }}
         >
-          {stats.map(stat => <MenuItem key={stat._id} value={stat._id}>{stat.name}</MenuItem>)}
+          {stats.map(stat => <StyledItem key={stat._id} value={stat._id}>{stat.name}</StyledItem>)}
         </StyledSelect>
 
     </DivFlex>

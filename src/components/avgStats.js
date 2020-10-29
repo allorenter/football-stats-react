@@ -7,13 +7,13 @@ const StyledTable = styled(Table)({
   background: colors.tertiary,
   "& tr td, tr th": {
     color: colors.font,
-    borderBottom: `2px solid ${colors.primary}`
+    borderBottom: `none`,
+    textAlign: "center"
   },
   "& tr:hover" : {
     "& td": {
       background: colors.detailsColor
     }
-    
   },
   "& .home": {
     color: colors.font,
@@ -80,15 +80,9 @@ const AvgStats = (props) => {
           <StyledTableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell className="home"></TableCell>
-              <TableCell className="home">Local</TableCell>
-              <TableCell className="home"></TableCell>
-              <TableCell className="away"></TableCell>
-              <TableCell className="away">Visitante</TableCell>
-              <TableCell className="away"></TableCell>
-              <TableCell className="total"></TableCell>
-              <TableCell className="total">Total</TableCell>
-              <TableCell className="total"></TableCell>
+              <TableCell colSpan={3} className="home">Local</TableCell>
+              <TableCell colSpan={3} className="away">Visitante</TableCell>
+              <TableCell colSpan={3} className="total">Total</TableCell>
             </TableRow>
             <TableRow className="secondTrHeader">
               <TableCell className="team">Equipo</TableCell>
