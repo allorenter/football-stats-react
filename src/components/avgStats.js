@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@material-ui/core/styles";
 import { colors } from "../styles/styles";
 import { Grid, TableRow, TableHead, Table, TableBody, TableCell, TableContainer} from "@material-ui/core";
+import { getUrlRequest } from "../utils/utils";
+import axios from "axios";
 
 const StyledTable = styled(Table)({
+  height: "100%",
   background: colors.tertiary,
   "& tr td, tr th": {
+    width: "9%",
     color: colors.font,
     borderBottom: `none`,
-    textAlign: "center"
-  },
-  "& tr:hover" : {
-    "& td": {
-      background: colors.detailsColor
-    }
   },
   "& .home": {
     color: colors.font,
@@ -28,6 +26,7 @@ const StyledTable = styled(Table)({
     background: colors.secondary,
   },
   "& .team": {
+    width: "16%",
     color: colors.font,
     background: colors.tertiary,
   }
@@ -44,35 +43,25 @@ const StyledTableHead = styled(TableHead)({
   }, 
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-/*
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-*/
-const rows = [];
 const AvgStats = (props) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    const url = getUrlRequest(`match/get-avg-stats-teams/2021/${props.selectedCompetition}/${props.selectedStat}`);
+    axios
+    .get(url)
+    .then((res) => {
+      setData(res.data.data);
+      setLoading(false);
+    })
+    .catch((e) => { 
+      setLoading(false);
+    });
+    
+  }, [props.selectedStat, props.selectedCompetition]);
+ 
   return (
     <Grid container>
       <TableContainer>
@@ -98,20 +87,20 @@ const AvgStats = (props) => {
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
+            {data.map((row) => (
+              <TableRow key={row._id}>
                 <TableCell className="team" component="th" scope="row">
-                  {row.name}
+                  {row._id}
                 </TableCell>
-                <TableCell className="home">{row.calories}</TableCell>
-                <TableCell className="home">{row.fat}</TableCell>
-                <TableCell className="home">{row.carbs}</TableCell>
-                <TableCell className="away">{row.protein}</TableCell>
-                <TableCell className="away">{row.calories}</TableCell>
-                <TableCell className="away">{row.fat}</TableCell>
-                <TableCell className="total">{row.carbs}</TableCell>
-                <TableCell className="total">{row.protein}</TableCell>
-                <TableCell className="total">{row.protein}</TableCell>
+                <TableCell className="home">{row.home.avgFor}</TableCell>
+                <TableCell className="home">{row.home.avgAgainst}</TableCell>
+                <TableCell className="home">{row.home.total}</TableCell>
+                <TableCell className="away">{row.away.avgFor}</TableCell>
+                <TableCell className="away">{row.away.avgAgainst}</TableCell>
+                <TableCell className="away">{row.away.total}</TableCell>
+                <TableCell className="total">{row.total.avgFor}</TableCell>
+                <TableCell className="total">{row.total.avgAgainst}</TableCell>
+                <TableCell className="total">{row.total.total}</TableCell>
               </TableRow>
             ))}
           </TableBody>

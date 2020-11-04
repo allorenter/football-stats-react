@@ -1,12 +1,11 @@
-import React from "react";
-import "./App.css";
+import React, { useState, useEffect } from "react";
 import { styled } from "@material-ui/core/styles";
 import { colors } from "./styles/styles";
 import { Grid } from "@material-ui/core";
-import Header from "./components/header";
-import MainMenu from "./components/mainMenu";
+import LeftMenu from "./components/leftMenu";
 import ContentPage from "./components/contentPage";
-import ContainerMenus from "./components/containerMenus";
+import StatSelector from "./components/statSelector";
+import CompetitionsSelector from "./components/competititonsSelector";
 
 const StyledApp = styled(Grid)({
   minHeight: "100vh",
@@ -14,19 +13,37 @@ const StyledApp = styled(Grid)({
   color: colors.font,
 });
 
+const StyledContainerMenus = styled(Grid)({
+  padding: ".1rem 2.5rem",
+  background: colors.primary,
+  minHeight: "6.5vh",
+});
+
 function App() {
+  const [selectedStat, setSelectedStat] = useState("ftg");
+  const [selectedCompetition, setSelectedCompetition] = useState("E0");
+
   return (
     <StyledApp container direction="column">
-      <Header />
       <Grid container>
         <Grid item xs={2}>
-          <MainMenu />
+          <LeftMenu />
         </Grid>
         <Grid item xs={10}>
-          <Grid>
-            <ContainerMenus />
-          </Grid>
-          <ContentPage />
+          <StyledContainerMenus container justify="space-between">
+            <StatSelector
+              selectedStat={selectedStat}
+              setSelectedStat={setSelectedStat}
+            />
+            <CompetitionsSelector
+              setSelectedCompetition={setSelectedCompetition}
+              selectedCompetition={selectedCompetition}
+            />
+          </StyledContainerMenus>
+          <ContentPage
+            selectedStat={selectedStat}
+            selectedCompetition={selectedCompetition}
+          />
         </Grid>
       </Grid>
     </StyledApp>

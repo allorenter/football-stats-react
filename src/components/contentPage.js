@@ -5,12 +5,13 @@ import { Grid } from '@material-ui/core';
 import AvgStats from './avgStats';
 
 const  StyledGrid = styled(Grid)({
+  height: "93.5vh"
 });
 
 const ContentPage = (props) => {
   return (
     <StyledGrid justify="center" container>
-        <AvgStats />
+        <AvgStats selectedCompetition={props.selectedCompetition} selectedStat={props.selectedStat}/>
     </StyledGrid>
   );
 };

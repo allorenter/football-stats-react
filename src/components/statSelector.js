@@ -28,10 +28,10 @@ const StyledItem = styled(MenuItem)({
   minWidth: "176px"
 });
 
-const StatsFilters = () => {
-  const [selectedStat, setSelectedStat] = useState("FTG");
-  const [open, setOpen] = React.useState(false);
+const StatSelector = (props) => {
+
   const [stats, setStats] = useState([]);
+  const [open, setOpen] = React.useState(false);
   
   useEffect(() => {
     axios
@@ -42,9 +42,8 @@ const StatsFilters = () => {
     .catch((e) => {
       
     });
-  }, [])
-  
-  
+  }, []);
+
   return (
     <DivFlex>
       <StyledSelect
@@ -53,8 +52,8 @@ const StatsFilters = () => {
           open={open}
           onClose={()=>setOpen(false)}
           onOpen={()=>setOpen(true)}
-          value={selectedStat}
-          onChange={e=>setSelectedStat(e.target.value)}
+          value={props.selectedStat}
+          onChange={e=>props.setSelectedStat(e.target.value)}
           MenuProps={{
             anchorOrigin: {
               vertical: "bottom",
@@ -74,4 +73,4 @@ const StatsFilters = () => {
   );
 };
 
-export default StatsFilters;
+export default StatSelector;
