@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "@material-ui/core/styles";
-import { colors } from "../styles/styles";
+import { colors, lightenDarkenColor } from "../styles/styles";
 import { Grid, TableRow, TableHead, Table, TableBody, TableCell, TableContainer} from "@material-ui/core";
 import { getUrlRequest } from "../utils/utils";
 import axios from "axios";
@@ -12,6 +12,10 @@ const StyledTable = styled(Table)({
     width: "9%",
     color: colors.font,
     borderBottom: `none`,
+    transition: "0.3s"
+  },
+  "& tr:hover td": {
+    background: lightenDarkenColor(colors.tertiary, 30),
   },
   "& .home": {
     color: colors.font,
@@ -89,9 +93,7 @@ const AvgStats = (props) => {
           <TableBody>
             {data.map((row) => (
               <TableRow key={row._id}>
-                <TableCell className="team" component="th" scope="row">
-                  {row._id}
-                </TableCell>
+                <TableCell className="team">{row._id}</TableCell>
                 <TableCell className="home">{row.home.avgFor}</TableCell>
                 <TableCell className="home">{row.home.avgAgainst}</TableCell>
                 <TableCell className="home">{row.home.total}</TableCell>
