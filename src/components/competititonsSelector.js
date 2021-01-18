@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FlexDiv } from "../styles/styles";
-import axios from "axios";
-import { getUrlRequest } from "../utils/utils";
 import { styled, withStyles } from "@material-ui/core/styles";
 import { colors } from "../styles/styles";
 import { Tooltip, Button } from "@material-ui/core";
+import { getAvailableCompetitions } from "../utils/api";
 
 const StyledButton = styled(Button)({
   heigth: "100%",
@@ -53,8 +52,7 @@ const CompetitionsSelector = (props) => {
   const [competitions, setCompetitions] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(getUrlRequest("competition/get"))
+    getAvailableCompetitions()
       .then((res) => {
         setCompetitions(res.data.data);
       })

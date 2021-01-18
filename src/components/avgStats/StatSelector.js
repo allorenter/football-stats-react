@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { styled } from "@material-ui/core/styles";
 import { colors, FlexDiv, lightenDarkenColor } from "../../styles/styles";
 import { MenuItem, Select } from "@material-ui/core";
-import axios from "axios";
-import { getUrlRequest } from "../../utils/utils";
+import { getAvailableStats } from "../../utils/api";
 
 const StyledSelect = styled(Select)({
   color: colors.font,
@@ -33,8 +32,7 @@ const StatSelector = (props) => {
   const [open, setOpen] = React.useState(false);
   
   useEffect(() => {
-    axios
-    .get(getUrlRequest("stat/get"))
+    getAvailableStats()
     .then((res) => {
       setStats(res.data.data);
     })

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ContentMenu } from "../../styles/styles";
 import { Grid} from "@material-ui/core";
-import { getUrlRequest } from "../../utils/utils";
-import axios from "axios";
 import StatSelector from "./StatSelector";
 import CompetitionsSelector from "../CompetititonsSelector";
 import TeamsList from "./TeamsList";
+import { getAvgStatTeams } from "../../utils/api";
 
 const AvgStats = (props) => {
   const [teamsData, setteamsData] = useState([]);
@@ -13,9 +12,7 @@ const AvgStats = (props) => {
   const [selectedCompetition, setSelectedCompetition] = useState("E0");
 
   useEffect(() => {
-    const url = getUrlRequest(`team/get-avg-stats-teams/2021/${selectedCompetition}/${selectedStat}`);
-    axios
-    .get(url)
+    getAvgStatTeams(selectedCompetition, selectedStat)
     .then((res) => {
       setteamsData(res.data.data);
     })
