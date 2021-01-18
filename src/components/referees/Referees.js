@@ -5,7 +5,7 @@ import CompetitionsSelector from "../CompetititonsSelector";
 import RefereesList from "./RefereesList";
 import { getRefereesBySeasonCompetition } from "../../utils/api";
 
-const Referee = (props) => {
+const Referees = (props) => {
   const [refereesData, setRefereesData] = useState([]);
   const [selectedCompetition, setSelectedCompetition] = useState("E0");
 
@@ -30,4 +30,4 @@ const Referee = (props) => {
   );
 };
 
-export default Referee;
+export default Referees;
