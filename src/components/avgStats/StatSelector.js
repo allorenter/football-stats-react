@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "@material-ui/core/styles";
-import { colors, DivFlex, lightenDarkenColor } from "../styles/styles";
+import { colors, FlexDiv, lightenDarkenColor } from "../../styles/styles";
 import { MenuItem, Select } from "@material-ui/core";
 import axios from "axios";
-import { getUrlRequest } from "../utils/utils";
+import { getUrlRequest } from "../../utils/utils";
 
 const StyledSelect = styled(Select)({
   color: colors.font,
   fontWeight: "600",
-  minWidth: "2rem",
   paddingLeft: "8px",
   background: lightenDarkenColor(colors.tertiary, 30),
   borderRadius: "4px",
@@ -45,7 +44,7 @@ const StatSelector = (props) => {
   }, []);
 
   return (
-    <DivFlex>
+    <FlexDiv>
       <StyledSelect
           disableUnderline 
           id="statSelector"
@@ -69,7 +68,7 @@ const StatSelector = (props) => {
           {stats.map(stat => <StyledItem key={stat._id} value={stat._id}>{stat.name}</StyledItem>)}
         </StyledSelect>
 
-    </DivFlex>
+    </FlexDiv>
   );
 };
 
