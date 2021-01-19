@@ -23,6 +23,7 @@ const MainMenu = (props) => {
   });
   
   const StyledMenuItem = styled(MenuItem)({
+    background: `${colors.secondary}!important`,
     fontWeight: "600",
     paddingTop: ".5rem",
     paddingBottom: ".5rem",
@@ -39,13 +40,12 @@ const MainMenu = (props) => {
       }
     },
     "&:hover" : {
-      background: "inherit",
-        "&:not(.selected)": {
-          color: lightenDarkenColor("#ffffff", -50),
-        "& svg path": {
-          fill: lightenDarkenColor("#ffffff", -50)
-        }
+      "&:not(.selected)": {
+        color: lightenDarkenColor("#ffffff", -50),
+      "& svg path": {
+        fill: lightenDarkenColor("#ffffff", -50)
       }
+    }
     },
     "&.selected": {
       color: colors.detailsColor,

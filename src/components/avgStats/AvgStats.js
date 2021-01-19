@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { ContentMenu } from "../../styles/styles";
-import { Grid} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import StatSelector from "./StatSelector";
-import CompetitionsSelector from "../CompetititonsSelector";
+import CompetitionSelector from "../CompetititonSelector";
 import TeamsList from "./TeamsList";
 import { getAvgStatTeams } from "../../utils/api";
 
 const AvgStats = (props) => {
-  const [teamsData, setteamsData] = useState([]);
+  const [teamsData, setTeamsData] = useState([]);
   const [selectedStat, setSelectedStat] = useState("ftg");
   const [selectedCompetition, setSelectedCompetition] = useState("E0");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     getAvgStatTeams(selectedCompetition, selectedStat)
-    .then((res) => {
-      setteamsData(res.data.data);
-    })
-    .catch((e) => { 
-    });
-    
+      .then((res) => {
+        setTeamsData(res.data.data);
+        setLoading(false);
+      })
+      .catch((e) => {});
   }, [selectedStat, selectedCompetition]);
- 
+
   return (
     <Grid container>
       <ContentMenu container justify="space-between">
@@ -28,12 +29,12 @@ const AvgStats = (props) => {
           selectedStat={selectedStat}
           setSelectedStat={setSelectedStat}
         />
-        <CompetitionsSelector
+        <CompetitionSelector
           setSelectedCompetition={setSelectedCompetition}
           selectedCompetition={selectedCompetition}
         />
       </ContentMenu>
-      <TeamsList teamsData={teamsData} />
+      <TeamsList loading={loading} teamsData={teamsData} />
     </Grid>
   );
 };

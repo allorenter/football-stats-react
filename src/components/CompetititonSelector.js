@@ -4,9 +4,9 @@ import { styled, withStyles } from "@material-ui/core/styles";
 import { colors } from "../styles/styles";
 import { Tooltip, Button } from "@material-ui/core";
 import { getAvailableCompetitions } from "../utils/api";
+import Loading from "./Loading";
 
 const ButtonCompetition = (props) => {
-
   const StyledButton = styled(Button)({
     heigth: "100%",
     marginLeft: "10px",
@@ -24,11 +24,11 @@ const ButtonCompetition = (props) => {
     "&.selected": {
       borderBottom: `2px solid ${colors.detailsColor}`,
       "& img": {
-        opacity: 1
-      }
+        opacity: 1,
+      },
     },
   });
-  
+
   const StyledTooltip = withStyles({
     tooltip: {
       background: colors.detailsColor,
@@ -51,30 +51,37 @@ const ButtonCompetition = (props) => {
   );
 };
 
-const CompetitionsSelector = (props) => {
+const CompetitionSelector = (props) => {
   const [competitions, setCompetitions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     getAvailableCompetitions()
       .then((res) => {
         setCompetitions(res.data.data);
+        setLoading(false);
       })
       .catch((e) => {});
   }, []);
 
   return (
     <FlexDiv>
-      {competitions.map((competition) => (
-        <ButtonCompetition
-          key={competition._id}
-          id={competition._id}
-          name={competition.name}
-          selected={competition._id === props.selectedCompetition}
-          setSelectedCompetition={props.setSelectedCompetition}
-        />
-      ))}
+      {loading ? (
+        <Loading size="1.8em" />
+      ) : (
+        competitions.map((competition) => (
+          <ButtonCompetition
+            key={competition._id}
+            id={competition._id}
+            name={competition.name}
+            selected={competition._id === props.selectedCompetition}
+            setSelectedCompetition={props.setSelectedCompetition}
+          />
+        ))
+      )}
     </FlexDiv>
   );
 };
 
-export default CompetitionsSelector;
+export default CompetitionSelector;

@@ -1,5 +1,5 @@
 import { Button, Grid, Table } from "@material-ui/core";
-import { styled } from "@material-ui/core/styles";
+import { styled, makeStyles } from "@material-ui/core/styles";
 
 export const colors = {
   primary: "#1C1E23",
@@ -82,4 +82,16 @@ export const StyledTable = styled(Table)({
     color: colors.font,
     background: colors.secondary
   }
+});
+
+export const darkenOpacity = makeStyles({
+  root: {
+    opacity: ".2"
+  },
+});
+
+export const lightenOpacity = makeStyles({
+  root: {
+    opacity: "1"
+  },
 });
