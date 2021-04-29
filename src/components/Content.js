@@ -1,16 +1,14 @@
 import React, {  } from "react";
-//import { styled } from '@material-ui/core/styles';
-//import { colors } from "../styles/styles";
 import { Grid } from '@material-ui/core';
 import AvgStats from './avgStats/AvgStats';
-import Referee from './referees/Referees';
+import Referees from './referees/Referees';
 
 
 const Content = (props) => {
 
   const element = {
     avgStats: <AvgStats />,
-    referee: <Referee />
+    referee: <Referees />
   };
 
   return (

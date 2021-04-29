@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import { ContentMenu } from "../../styles/styles";
-import CompetitionsSelector from "../CompetititonsSelector";
-import { getUrlRequest } from "../../utils/utils";
-import axios from "axios";
+import CompetitionSelector from "../CompetititonSelector";
 import RefereesList from "./RefereesList";
+import { getRefereesBySeasonCompetition } from "../../utils/api";
 
-const Referee = (props) => {
+const Referees = (props) => {
   const [refereesData, setRefereesData] = useState([]);
   const [selectedCompetition, setSelectedCompetition] = useState("E0");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const url = getUrlRequest(
-      `referee/get-by-seasons-competition`
-    );
-    axios
-      .post(url, {
-        competition: selectedCompetition,
-        seasons: []
-      })
+    setLoading(true);
+    getRefereesBySeasonCompetition([], selectedCompetition)
       .then((res) => {
-        setRefereesData(res.data.data);       
+        setRefereesData(res.data.data);
+        setLoading(false);
       })
       .catch((e) => {});
   }, [selectedCompetition]);
@@ -28,14 +23,14 @@ const Referee = (props) => {
   return (
     <Grid container>
       <ContentMenu container justify="flex-end">
-        <CompetitionsSelector
+        <CompetitionSelector
           setSelectedCompetition={setSelectedCompetition}
           selectedCompetition={selectedCompetition}
         />
       </ContentMenu>
-      <RefereesList refereesData={refereesData} />
+      <RefereesList loading={loading} refereesData={refereesData} />
     </Grid>
   );
 };
 
-export default Referee;
+export default Referees;
