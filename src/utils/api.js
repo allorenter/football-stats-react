@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL = "http://localhost:9000/api/";
+const SERVER_URL = "https://allorenter-football-stats.herokuapp.com/api/";
 
 export const getAvgStatTeams = (competition, stat) =>
   axios.get(

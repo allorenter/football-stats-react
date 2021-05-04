@@ -45,7 +45,7 @@ const ButtonCompetition = (props) => {
       onClick={() => props.setSelectedCompetition(props.id)}
     >
       <StyledTooltip title={props.name} placement="top">
-        <img src={"images/" + props.id + ".png"} alt={props.name} />
+        <img src={"images/" + props.id.toLowerCase() + ".png"} alt={props.name} />
       </StyledTooltip>
     </StyledButton>
   );
