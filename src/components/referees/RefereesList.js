@@ -7,6 +7,10 @@ import { darkenOpacity, lightenOpacity } from "../../styles/styles";
 
 const RefereesList = (props) => {
   const classes = props.loading ? darkenOpacity() : lightenOpacity(); 
+  console.log("REFEREESDATA", props.refereesData);
+  if((!props.refereesData || props.refereesData.length === 0) && props.loading === false){
+      return (<div>NO HAY DATOS SOBRE ARBITROS DISPONIBLES PARA ESA COMPETICIÓN</div>);
+  }
   return (
     <TableContainer>
       {props.loading && <Loading boxHeight="45vh" boxWidth="81%" />}

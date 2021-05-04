@@ -35,8 +35,8 @@ const StatSelector = (props) => {
   useEffect(() => {
     setLoading(true);
     getAvailableStats()
-      .then((res) => {
-        setStats(res.data.data);
+      .then((res) => { 
+        setStats(res.data.data.length > 0 ?  res.data.data : [{ _id: "ftg", name: "Goles"}]);
         setLoading(false);
       })
       .catch((e) => {});

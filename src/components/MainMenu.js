@@ -5,7 +5,6 @@ import { MenuList, MenuItem } from '@material-ui/core';
 import {ReactComponent as AvgIcon} from "../images/avg.svg";
 //import {ReactComponent as TeamIcon} from "../images/team.svg";
 import {ReactComponent as CardsIcon} from "../images/cards.svg";
-import {ReactComponent as OddsIcon} from "../images/odds.svg";
 
 const MainMenu = (props) => {
 
@@ -65,10 +64,6 @@ const MainMenu = (props) => {
       <StyledMenuItem className={props.content === "referee" ? "selected" : ""} onClick={()=>props.setContent("referee")}>
         <CardsIcon />
         Arbitros
-      </StyledMenuItem>
-      <StyledMenuItem className={props.content === "odds" ? "selected" : ""} onClick={()=>props.setContent("odds")}>
-        <OddsIcon />
-        Cuotas
       </StyledMenuItem>
     </StyledMenu>
   );
