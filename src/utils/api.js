@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const SERVER_URL = "https://allorenter-football-stats.herokuapp.com/api/";
+let server = "localhost:9000/api/";
+if (process.env.NODE_ENV === 'production') {
+   server = "https://allorenter-football-stats.herokuapp.com/api/";
+}
+
+const SERVER_URL = server;
 
 export const getAvgStatTeams = (competition, stat) =>
   axios.get(
