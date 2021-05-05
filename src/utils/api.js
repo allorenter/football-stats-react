@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let server = "localhost:9000/api/";
+let server = "http://localhost:9000/api/";
 if (process.env.NODE_ENV === 'production') {
    server = "https://allorenter-football-stats.herokuapp.com/api/";
 }
