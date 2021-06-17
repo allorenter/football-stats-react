@@ -7,10 +7,9 @@ import {ReactComponent as AvgIcon} from "../images/avg.svg";
 import {ReactComponent as CardsIcon} from "../images/cards.svg";
 
 const MainMenu = (props) => {
-
+  
   const StyledMenu = styled(MenuList)({
     background: colors.secondary,
-    minHeight: "97vh",
     paddingTop: "1.5vh",
     paddingBottom: "1.5vh",
     "&:focus": {
@@ -18,6 +17,13 @@ const MainMenu = (props) => {
     },
     "& li:nth-child(1)": {
       marginTop: ".3em"
+    },
+    "@media (max-width: 959px)": {
+        paddingTop: "0",
+        paddingBottom: "0",
+        "& li:nth-child(1)": {
+          marginTop: ".5em"
+        },
     }
   });
   
@@ -52,7 +58,11 @@ const MainMenu = (props) => {
       "& svg path": {
         fill: colors.detailsColor
       }
-    }
+    },
+    "@media (max-width: 959px)": {
+      marginTop: "0",
+      marginBottom: "0",
+  }
   });
 
   return (

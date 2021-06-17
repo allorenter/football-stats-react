@@ -25,6 +25,9 @@ const StatSelector = (props) => {
     "&:hover": {
       opacity: ".8",
     },
+    "@media (max-width: 959px)": {
+      margin: '1em',
+    }
   });
 
   const StyledMenuItem = styled(MenuItem)({

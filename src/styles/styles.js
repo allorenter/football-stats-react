@@ -52,6 +52,9 @@ export const ContentMenu = styled(Grid)({
   padding: ".1rem 2.5rem",
   background: colors.primary,
   minHeight: "6.5vh",
+  "@media (max-width: 959px)": {
+    padding: '0 0 2px 0',
+  }
 });
 
 export const StyledTable = styled(Table)({
