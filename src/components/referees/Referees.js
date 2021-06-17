@@ -4,6 +4,9 @@ import { ContentMenu } from "../../styles/styles";
 import CompetitionSelector from "../CompetititonSelector";
 import RefereesList from "./RefereesList";
 import { getRefereesBySeasonCompetition } from "../../utils/api";
+import Loading from "../Loading";
+import Alert from '@material-ui/lab/Alert';
+import { styled } from "@material-ui/core/styles";
 
 const Referees = (props) => {
   const [refereesData, setRefereesData] = useState([]);
@@ -20,6 +23,10 @@ const Referees = (props) => {
       .catch((e) => {});
   }, [selectedCompetition]);
 
+  const StyledAlert = styled(Alert)({
+    margin: "10vh auto",
+  });
+
   return (
     <Grid container>
       <ContentMenu container justify="flex-end">
@@ -28,7 +35,11 @@ const Referees = (props) => {
           selectedCompetition={selectedCompetition}
         />
       </ContentMenu>
-      <RefereesList loading={loading} refereesData={refereesData} />
+      {loading && <Loading topPosition={'15em'}/> }
+      {Array.isArray(refereesData) && refereesData.length > 0 
+        ? <RefereesList loading={loading} refereesData={refereesData} />
+        : !loading && <StyledAlert severity="warning">NO HAY DATOS DISPONIBLES EN ESTA COMPETICIÓN</StyledAlert>
+      }
     </Grid>
   );
 };
