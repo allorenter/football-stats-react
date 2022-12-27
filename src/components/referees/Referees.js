@@ -8,6 +8,8 @@ import Loading from "../Loading";
 import Alert from '@material-ui/lab/Alert';
 import { styled } from "@material-ui/core/styles";
 
+const ACTUAL_SEASON = process.env.REACT_APP_ACTUAL_SEASON;
+
 const Referees = (props) => {
   const [refereesData, setRefereesData] = useState([]);
   const [selectedCompetition, setSelectedCompetition] = useState("E0");
@@ -15,7 +17,7 @@ const Referees = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    getRefereesBySeasonCompetition([], selectedCompetition)
+    getRefereesBySeasonCompetition(ACTUAL_SEASON, selectedCompetition)
       .then((res) => {
         setRefereesData(res.data.data);
         setLoading(false);
