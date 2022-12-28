@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ContentMenu, FlexDiv, colors } from "../../styles/styles";
+import { ContentMenu } from "../../styles/styles";
 import { Grid } from "@material-ui/core";
 import StatSelector from "./StatSelector";
 import CompetitionSelector from "../CompetititonSelector";
