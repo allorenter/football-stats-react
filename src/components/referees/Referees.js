@@ -7,6 +7,7 @@ import { getRefereesBySeasonCompetition } from "../../utils/api";
 import Loading from "../Loading";
 import Alert from '@material-ui/lab/Alert';
 import { styled } from "@material-ui/core/styles";
+import SeasonSelector from "../SeasonSelector";
 
 const ACTUAL_SEASON = process.env.REACT_APP_ACTUAL_SEASON;
 
@@ -14,16 +15,17 @@ const Referees = (props) => {
   const [refereesData, setRefereesData] = useState([]);
   const [selectedCompetition, setSelectedCompetition] = useState("E0");
   const [loading, setLoading] = useState(false);
+  const [selectedSeason, setSelectedSeason] = useState(ACTUAL_SEASON);
 
   useEffect(() => {
     setLoading(true);
-    getRefereesBySeasonCompetition(ACTUAL_SEASON, selectedCompetition)
+    getRefereesBySeasonCompetition(selectedSeason, selectedCompetition)
       .then((res) => {
         setRefereesData(res.data.data);
         setLoading(false);
       })
       .catch((e) => {});
-  }, [selectedCompetition]);
+  }, [selectedCompetition, selectedSeason]);
 
   const StyledAlert = styled(Alert)({
     margin: "10vh auto",
@@ -31,7 +33,11 @@ const Referees = (props) => {
 
   return (
     <Grid container>
-      <ContentMenu container justify="flex-end">
+      <ContentMenu container justify="space-between">
+          <SeasonSelector 
+            selectedSeason={selectedSeason}
+            setSelectedSeason={setSelectedSeason}
+          />
         <CompetitionSelector
           setSelectedCompetition={setSelectedCompetition}
           selectedCompetition={selectedCompetition}
