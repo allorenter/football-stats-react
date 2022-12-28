@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ContentMenu } from "../../styles/styles";
+import { ContentMenu, StyledSelectors } from "../../styles/styles";
 import { Grid } from "@material-ui/core";
 import StatSelector from "./StatSelector";
 import CompetitionSelector from "../CompetititonSelector";
@@ -11,16 +11,6 @@ import { styled } from "@material-ui/core/styles";
 import SeasonSelector from "../SeasonSelector";
 
 const ACTUAL_SEASON = process.env.REACT_APP_ACTUAL_SEASON;
-
-const StyledSelectors = styled('div')({
-  display: 'flex',
-  gap: '1em',
-  flexWrap: 'wrap',
-  "@media (max-width: 1140px)": {
-    padding: '1em'
-  }
-});
-
 
 const AvgStats = (props) => {
   const [teamsData, setTeamsData] = useState([]);

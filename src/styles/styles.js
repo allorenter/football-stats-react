@@ -120,3 +120,12 @@ export const StyledMenuItem = styled(MenuItem)({
   fontSize: ".85rem",
   minWidth: "176px",
 });
+
+export const StyledSelectors = styled('div')({
+  display: 'flex',
+  gap: '1em',
+  flexWrap: 'wrap',
+  "@media (max-width: 1140px)": {
+    padding: '1em'
+  }
+});

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
-import { ContentMenu } from "../../styles/styles";
+import { ContentMenu, StyledSelectors } from "../../styles/styles";
 import CompetitionSelector from "../CompetititonSelector";
 import RefereesList from "./RefereesList";
 import { getRefereesBySeasonCompetition } from "../../utils/api";
@@ -34,10 +34,12 @@ const Referees = (props) => {
   return (
     <Grid container>
       <ContentMenu container justify="space-between">
-          <SeasonSelector 
-            selectedSeason={selectedSeason}
-            setSelectedSeason={setSelectedSeason}
-          />
+          <StyledSelectors>
+            <SeasonSelector 
+              selectedSeason={selectedSeason}
+              setSelectedSeason={setSelectedSeason}
+            />
+          </StyledSelectors>          
         <CompetitionSelector
           setSelectedCompetition={setSelectedCompetition}
           selectedCompetition={selectedCompetition}
