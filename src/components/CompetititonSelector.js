@@ -45,7 +45,7 @@ const ButtonCompetition = (props) => {
       onClick={() => props.setSelectedCompetition(props.id)}
     >
       <StyledTooltip title={props.name} placement="top">
-        <img src={"images/" + props.id + ".png"} alt={props.name} />
+        <img src={"images/" + props.id.toLowerCase() + ".png"} alt={props.name} />
       </StyledTooltip>
     </StyledButton>
   );
@@ -56,13 +56,20 @@ const CompetitionSelector = (props) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    getAvailableCompetitions()
-      .then((res) => {
-        setCompetitions(res.data.data);
-        setLoading(false);
-      })
-      .catch((e) => {});
+    // sirve para no hacer la llamada cada vez que se renderice el componente, las competiciones disponibles no van a cambiar nunca o casi nunca
+    const sessionStorageAvailableCompetitions = JSON.parse(sessionStorage.getItem("availableCompetitions"));
+    if(Array.isArray(sessionStorageAvailableCompetitions) && sessionStorageAvailableCompetitions.length > 0){
+      setCompetitions(sessionStorageAvailableCompetitions);
+    }else{
+      setLoading(true);
+    }
+    getAvailableCompetitions().then((res) => {
+      if(sessionStorageAvailableCompetitions !== res.data.data){
+        sessionStorage.setItem("availableCompetitions", JSON.stringify(res.data.data));
+        setCompetitions(res.data.data);   
+      }
+      setLoading(false);
+    }).catch((e) => {});
   }, []);
 
   return (

@@ -25,6 +25,9 @@ const StatSelector = (props) => {
     "&:hover": {
       opacity: ".8",
     },
+    "@media (max-width: 959px)": {
+      margin: '1em',
+    }
   });
 
   const StyledMenuItem = styled(MenuItem)({
@@ -35,8 +38,8 @@ const StatSelector = (props) => {
   useEffect(() => {
     setLoading(true);
     getAvailableStats()
-      .then((res) => {
-        setStats(res.data.data);
+      .then((res) => { 
+        setStats(res.data.data.length > 0 ?  res.data.data : [{ _id: "ftg", name: "Goles"}]);
         setLoading(false);
       })
       .catch((e) => {});

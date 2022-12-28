@@ -5,6 +5,11 @@ import StatSelector from "./StatSelector";
 import CompetitionSelector from "../CompetititonSelector";
 import TeamsList from "./TeamsList";
 import { getAvgStatTeams } from "../../utils/api";
+import Loading from "../Loading";
+import Alert from '@material-ui/lab/Alert';
+import { styled } from "@material-ui/core/styles";
+
+const ACTUAL_SEASON = process.env.REACT_APP_ACTUAL_SEASON;
 
 const AvgStats = (props) => {
   const [teamsData, setTeamsData] = useState([]);
@@ -14,7 +19,7 @@ const AvgStats = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    getAvgStatTeams(selectedCompetition, selectedStat)
+    getAvgStatTeams(ACTUAL_SEASON, selectedCompetition, selectedStat)
       .then((res) => {
         setTeamsData(res.data.data);
         setLoading(false);
@@ -22,6 +27,10 @@ const AvgStats = (props) => {
       .catch((e) => {});
   }, [selectedStat, selectedCompetition]);
 
+  const StyledAlert = styled(Alert)({
+    margin: "10vh auto",
+  });
+  
   return (
     <Grid container>
       <ContentMenu container justify="space-between">
@@ -34,7 +43,11 @@ const AvgStats = (props) => {
           selectedCompetition={selectedCompetition}
         />
       </ContentMenu>
-      <TeamsList loading={loading} teamsData={teamsData} />
+      {loading && <Loading topPosition={'15em'}/> }
+      {Array.isArray(teamsData) && teamsData.length > 0 
+        ? <TeamsList loading={loading} teamsData={teamsData} /> 
+        : !loading && <StyledAlert severity="warning">NO HAY DATOS DISPONIBLES EN ESTA COMPETICIÓN</StyledAlert>
+      }
     </Grid>
   );
 };

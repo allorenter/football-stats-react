@@ -4,6 +4,11 @@ import { ContentMenu } from "../../styles/styles";
 import CompetitionSelector from "../CompetititonSelector";
 import RefereesList from "./RefereesList";
 import { getRefereesBySeasonCompetition } from "../../utils/api";
+import Loading from "../Loading";
+import Alert from '@material-ui/lab/Alert';
+import { styled } from "@material-ui/core/styles";
+
+const ACTUAL_SEASON = process.env.REACT_APP_ACTUAL_SEASON;
 
 const Referees = (props) => {
   const [refereesData, setRefereesData] = useState([]);
@@ -12,13 +17,17 @@ const Referees = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    getRefereesBySeasonCompetition([], selectedCompetition)
+    getRefereesBySeasonCompetition(ACTUAL_SEASON, selectedCompetition)
       .then((res) => {
         setRefereesData(res.data.data);
         setLoading(false);
       })
       .catch((e) => {});
   }, [selectedCompetition]);
+
+  const StyledAlert = styled(Alert)({
+    margin: "10vh auto",
+  });
 
   return (
     <Grid container>
@@ -28,7 +37,11 @@ const Referees = (props) => {
           selectedCompetition={selectedCompetition}
         />
       </ContentMenu>
-      <RefereesList loading={loading} refereesData={refereesData} />
+      {loading && <Loading topPosition={'15em'}/> }
+      {Array.isArray(refereesData) && refereesData.length > 0 
+        ? <RefereesList loading={loading} refereesData={refereesData} />
+        : !loading && <StyledAlert severity="warning">NO HAY DATOS DISPONIBLES EN ESTA COMPETICIÓN</StyledAlert>
+      }
     </Grid>
   );
 };

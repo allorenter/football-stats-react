@@ -5,13 +5,11 @@ import { MenuList, MenuItem } from '@material-ui/core';
 import {ReactComponent as AvgIcon} from "../images/avg.svg";
 //import {ReactComponent as TeamIcon} from "../images/team.svg";
 import {ReactComponent as CardsIcon} from "../images/cards.svg";
-import {ReactComponent as OddsIcon} from "../images/odds.svg";
 
 const MainMenu = (props) => {
-
+  
   const StyledMenu = styled(MenuList)({
     background: colors.secondary,
-    minHeight: "97vh",
     paddingTop: "1.5vh",
     paddingBottom: "1.5vh",
     "&:focus": {
@@ -19,6 +17,13 @@ const MainMenu = (props) => {
     },
     "& li:nth-child(1)": {
       marginTop: ".3em"
+    },
+    "@media (max-width: 959px)": {
+        paddingTop: "0",
+        paddingBottom: "0",
+        "& li:nth-child(1)": {
+          marginTop: ".5em"
+        },
     }
   });
   
@@ -53,7 +58,11 @@ const MainMenu = (props) => {
       "& svg path": {
         fill: colors.detailsColor
       }
-    }
+    },
+    "@media (max-width: 959px)": {
+      marginTop: "0",
+      marginBottom: "0",
+  }
   });
 
   return (
@@ -65,10 +74,6 @@ const MainMenu = (props) => {
       <StyledMenuItem className={props.content === "referee" ? "selected" : ""} onClick={()=>props.setContent("referee")}>
         <CardsIcon />
         Arbitros
-      </StyledMenuItem>
-      <StyledMenuItem className={props.content === "odds" ? "selected" : ""} onClick={()=>props.setContent("odds")}>
-        <OddsIcon />
-        Cuotas
       </StyledMenuItem>
     </StyledMenu>
   );

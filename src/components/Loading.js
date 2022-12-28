@@ -6,9 +6,11 @@ import { styled } from "@material-ui/core/styles";
 const Loading = (props) => {
   
   const StyledBox = styled(Box)({
-    height: props.boxHeight || "auto",
-    width: props.boxWidth || "auto",
-    position: "absolute"
+    position: 'relative',
+    width: '100%',
+    height: '0',
+    top: props.topPosition || 0
+    
   });
 
   const StyledCircularProgress = styled(CircularProgress)({
