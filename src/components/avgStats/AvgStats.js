@@ -9,6 +9,8 @@ import Loading from "../Loading";
 import Alert from '@material-ui/lab/Alert';
 import { styled } from "@material-ui/core/styles";
 
+const ACTUAL_SEASON = process.env.REACT_APP_ACTUAL_SEASON;
+
 const AvgStats = (props) => {
   const [teamsData, setTeamsData] = useState([]);
   const [selectedStat, setSelectedStat] = useState("ftg");
@@ -17,7 +19,7 @@ const AvgStats = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    getAvgStatTeams(selectedCompetition, selectedStat)
+    getAvgStatTeams(ACTUAL_SEASON, selectedCompetition, selectedStat)
       .then((res) => {
         setTeamsData(res.data.data);
         setLoading(false);

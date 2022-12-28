@@ -27,9 +27,9 @@ const TeamsList = (props) => {
           <TeamDataTableRow subHeader={true} />
         </TableHead>
         <TableBody>
-          {props.teamsData?.map((row) => (
-            <TeamDataTableRow data={row} />
-          ))}
+          {props.teamsData?.map((row) => {
+            return <TeamDataTableRow key={row.teamId} data={row} />
+          })}
         </TableBody>
       </StyledTable>
     </TableContainer>
