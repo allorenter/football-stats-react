@@ -1,4 +1,4 @@
-import { Button, Grid, Table } from "@material-ui/core";
+import { Button, Grid, MenuItem, Select, Table } from "@material-ui/core";
 import { styled, makeStyles } from "@material-ui/core/styles";
 
 export const colors = {
@@ -97,4 +97,26 @@ export const lightenOpacity = makeStyles({
   root: {
     opacity: "1"
   },
+});
+
+export const StyledSelect = styled(Select)({
+  color: colors.font,
+  fontWeight: "600",
+  paddingLeft: "8px",
+  background: lightenDarkenColor(colors.tertiary, 30),
+  borderRadius: "4px",
+  fontSize: ".85rem",
+  minWidth: "190px",
+  paddingTop: "1px",
+  "& svg": {
+    color: colors.font,
+  },
+  "&:hover": {
+    opacity: ".8",
+  },
+});
+
+export const StyledMenuItem = styled(MenuItem)({
+  fontSize: ".85rem",
+  minWidth: "176px",
 });

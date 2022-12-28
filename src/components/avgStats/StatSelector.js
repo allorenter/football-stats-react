@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { styled } from "@material-ui/core/styles";
-import { colors, FlexDiv, lightenDarkenColor } from "../../styles/styles";
-import { MenuItem, Select } from "@material-ui/core";
+import { FlexDiv, StyledMenuItem, StyledSelect } from "../../styles/styles";
 import { getAvailableStats } from "../../utils/api";
 import Loading from "../Loading";
 
@@ -9,31 +7,6 @@ const StatSelector = (props) => {
   const [stats, setStats] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
-
-  const StyledSelect = styled(Select)({
-    color: colors.font,
-    fontWeight: "600",
-    paddingLeft: "8px",
-    background: lightenDarkenColor(colors.tertiary, 30),
-    borderRadius: "4px",
-    fontSize: ".85rem",
-    minWidth: "190px",
-    paddingTop: "1px",
-    "& svg": {
-      color: colors.font,
-    },
-    "&:hover": {
-      opacity: ".8",
-    },
-    "@media (max-width: 959px)": {
-      margin: '1em',
-    }
-  });
-
-  const StyledMenuItem = styled(MenuItem)({
-    fontSize: ".85rem",
-    minWidth: "176px",
-  });
 
   useEffect(() => {
     setLoading(true);
