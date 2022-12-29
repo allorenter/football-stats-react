@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 import StatSelector from "./StatSelector";
 import CompetitionSelector from "../CompetititonSelector";
 import TeamsList from "./TeamsList";
-import { getAvgStatTeams } from "../../utils/api";
+import { getAvgStatTeams } from "../../service/api";
 import Loading from "../Loading";
 import Alert from '@material-ui/lab/Alert';
 import { styled } from "@material-ui/core/styles";
@@ -23,7 +23,7 @@ const AvgStats = (props) => {
     setLoading(true);
     getAvgStatTeams(selectedSeason, selectedCompetition, selectedStat)
       .then((res) => {
-        setTeamsData(res.data.data);
+        setTeamsData(res.data);
         setLoading(false);
       })
       .catch((e) => {});

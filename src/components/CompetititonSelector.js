@@ -3,7 +3,7 @@ import { FlexDiv } from "../styles/styles";
 import { styled, withStyles } from "@material-ui/core/styles";
 import { colors } from "../styles/styles";
 import { Tooltip, Button } from "@material-ui/core";
-import { getAvailableCompetitions } from "../utils/api";
+import { getAvailableCompetitions } from "../service/api";
 import Loading from "./Loading";
 
 const ButtonCompetition = (props) => {
@@ -64,9 +64,9 @@ const CompetitionSelector = (props) => {
       setLoading(true);
     }
     getAvailableCompetitions().then((res) => {
-      if(sessionStorageAvailableCompetitions !== res.data.data){
-        sessionStorage.setItem("availableCompetitions", JSON.stringify(res.data.data));
-        setCompetitions(res.data.data);   
+      if(sessionStorageAvailableCompetitions !== res.data){
+        sessionStorage.setItem("availableCompetitions", JSON.stringify(res.data));
+        setCompetitions(res.data);   
       }
       setLoading(false);
     }).catch((e) => {});
