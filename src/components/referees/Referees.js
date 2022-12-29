@@ -21,7 +21,7 @@ const Referees = (props) => {
     setLoading(true);
     getRefereesBySeasonCompetition(selectedSeason, selectedCompetition)
       .then((res) => {
-        setRefereesData(res.data.data);
+        setRefereesData(res.data);
         setLoading(false);
       })
       .catch((e) => {});

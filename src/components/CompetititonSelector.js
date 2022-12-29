@@ -64,9 +64,9 @@ const CompetitionSelector = (props) => {
       setLoading(true);
     }
     getAvailableCompetitions().then((res) => {
-      if(sessionStorageAvailableCompetitions !== res.data.data){
-        sessionStorage.setItem("availableCompetitions", JSON.stringify(res.data.data));
-        setCompetitions(res.data.data);   
+      if(sessionStorageAvailableCompetitions !== res.data){
+        sessionStorage.setItem("availableCompetitions", JSON.stringify(res.data));
+        setCompetitions(res.data);   
       }
       setLoading(false);
     }).catch((e) => {});

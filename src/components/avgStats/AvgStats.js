@@ -23,7 +23,7 @@ const AvgStats = (props) => {
     setLoading(true);
     getAvgStatTeams(selectedSeason, selectedCompetition, selectedStat)
       .then((res) => {
-        setTeamsData(res.data.data);
+        setTeamsData(res.data);
         setLoading(false);
       })
       .catch((e) => {});
