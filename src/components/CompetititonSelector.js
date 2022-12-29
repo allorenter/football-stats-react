@@ -3,7 +3,7 @@ import { FlexDiv } from "../styles/styles";
 import { styled, withStyles } from "@material-ui/core/styles";
 import { colors } from "../styles/styles";
 import { Tooltip, Button } from "@material-ui/core";
-import { getAvailableCompetitions } from "../utils/api";
+import { getAvailableCompetitions } from "../service/api";
 import Loading from "./Loading";
 
 const ButtonCompetition = (props) => {

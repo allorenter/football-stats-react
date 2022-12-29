@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import { ContentMenu, StyledSelectors } from "../../styles/styles";
 import CompetitionSelector from "../CompetititonSelector";
 import RefereesList from "./RefereesList";
-import { getRefereesBySeasonCompetition } from "../../utils/api";
+import { getRefereesBySeasonCompetition } from "../../service/api";
 import Loading from "../Loading";
 import Alert from '@material-ui/lab/Alert';
 import { styled } from "@material-ui/core/styles";

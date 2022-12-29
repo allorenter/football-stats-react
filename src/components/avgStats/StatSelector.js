@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FlexDiv, StyledMenuItem, StyledSelect } from "../../styles/styles";
-import { getAvailableStats } from "../../utils/api";
+import { getAvailableStats } from "../../service/api";
 import Loading from "../Loading";
 
 const StatSelector = (props) => {
